@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Lab4</title>
+
+    <link rel="stylesheet" href="stylesheet/w3.css">
+    <link rel="stylesheet" href="stylesheet/main.css">
+    <link rel="stylesheet" href="stylesheet/index.css">
+    <style>
+        body, html {height: 100%}
+        body {
+
+            background-image: url('image/img.png');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
+<body>
+<div id="content" class="w3-animate-opacity">
+    <!--start-->
+    <div id="mainTable" class="shaded">
+        <div><h4>Ле Фан Фу Куок</h4></div>
+        <div><h4>P3212</h4></div>
+        <div class="box-app"><h3>Application</h3></div>
+        <div>Username: </div>
+        <div><input type="text" v-model="user.username"/></div>
+        <div>Password: </div>
+        <div><input type="password" v-model="user.password"/></div>
+        <div class="box-button">
+            <button class="effButton" id="login" type="button" @click="login" @submit.prevent>Login</button>
+            <button class="effButton" id="register" type="button" @click="register" @submit.prevent>Register</button>
+        </div>
+        <div class="box-error notification"> {{message}}</div>
+    </div>
+    <!--end-->
+</div>
+</body>
+<script src="script/index.js" ></script>
+</html>

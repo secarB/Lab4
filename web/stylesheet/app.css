@@ -1,0 +1,100 @@
+input {
+    overflow: hidden;
+    border: 1px solid #ce1237;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    line-height: 1.1;
+    background-color: #fff;
+}
+
+svg {
+    box-shadow: inset 0 0 1px 1px gray;
+}
+
+#resTable {
+    border: 1px solid #ce1237;
+    border-radius: 0.25em;
+    border-collapse: collapse;
+    margin: auto auto 3%;
+    width: 90%;
+    table-layout: fixed;
+}
+
+#resTable th {
+    color: white;
+    background-color: #ce1237;
+}
+
+.commandButtonsGroup {
+    text-decoration: none;
+}
+
+@media screen and (min-device-width: 1047px) {
+    #mainTable{
+        /*width: max-content;*/
+        display: grid;
+        grid-template-columns: 500px 150px 500px;
+    }
+    .box-app {
+        grid-column-start: 2;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+    .box-graph {
+        grid-row-start: 3;
+        grid-row-end: 6;
+    }
+    .box-button {
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+    svg {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+@media screen and (max-device-width: 1046px) and (min-device-width: 849px) {
+    #content{
+        width: 90vw;
+    }
+    #mainTable{
+        /*width: max-content;*/
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    .box-app {
+        grid-row-start: 3;
+    }
+    svg {
+        width: 70vw;
+        height: 70vw;
+    }
+    option {
+        font-size: 2vw;
+    }
+}
+
+
+@media screen and (max-device-width: 848px) {
+    #content{
+        width: 100vw;
+    }
+    #mainTable{
+        /*width: max-content;*/
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    .box-app {
+        grid-row-start: 3;
+    }
+    svg {
+        width: 90vw;
+        height: 90vw;
+    }
+    option {
+        font-size: 2vw;
+    }
+}
+
