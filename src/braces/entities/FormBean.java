@@ -90,17 +90,17 @@ public class FormBean implements Serializable {
         boolean res = false;
 
         //for circle
-        if (floor(x) >= 0 && ceil(y) <= 0 && Double.compare(x*x + y*y, R*R/4) <= 0){
+        if (x>= 0 && y <= 0 && Double.compare(x*x + y*y, R*R) <= 0){
             res = true;
         }
 
         //for rectangle
-        if (floor(x) >= 0 && Double.compare(x, R) <= 0 && floor(y) >= 0 && Double.compare(y, R) <= 0){
+        if (x <= 0 && Double.compare(-x, R/2) <= 0 && y >= 0 && Double.compare(y, R) <= 0){
             res = true;
         }
 
         //for triangle
-        if (ceil(x) <= 0 && floor(y) >= 0 && Double.compare(-2*x + y, R) <= 0){
+        if (x >= 0 && y >= 0 && Double.compare(2*x + y, R) <= 0){
             res = true;
         }
 

@@ -18,12 +18,14 @@
             background-attachment: fixed;
         }
     </style>
-    <!--vue 2 & jsdelivr-->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
-    <!--vue 2 & jsdelivr-->
+
 </head>
 <body>
+
+<!--vue 2 & jsdelivr-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
+<!--vue 2 & jsdelivr-->
 <div id="content" class="w3-animate-opacity">
     <!--start-->
     <div id="mainTable" class="shaded">
@@ -36,13 +38,14 @@
                 <line x1="150" y1="0" x2="150" y2="300" stroke="#000720"/>
                 <polygon points="300,150 295,155 295, 145" fill="#000720" stroke="#000720"/>
                 <polygon points="150,0 145,5 155,5" fill="#000720" stroke="#000720"/>
-                <rect id="rect" x="20" y="150" width="130" height="65" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                <polygon id="triangle" points="150,150 150,20 20,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
-                <path id="path" d="M 150,150 L280,150 A 130,130 0 0,1 150,280 Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                <rect id="rect" x="98" y="46" width="52" height="104" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                <polygon id="triangle" points="150,150 150,46 202,150" fill-opacity="0.4" stroke="navy" fill="blue"/>
+                <path id="path" d="M 150,150 L254,150 A 104,104 0 0,1 150,254    Z" fill-opacity="0.4" stroke="navy" fill="blue"/>
             </svg>
         </div>
         <div>Choose X: </div>
         <div id="div-x">
+            <button class="commandButtonsGroup" value="-4" style="padding:10px;font-weight:bold;">-4</button>
             <button class="commandButtonsGroup" value="-3" style="padding:10px;font-weight:bold;">-3</button>
             <button class="commandButtonsGroup" value="-2" style="padding:10px;font-weight:bold;">-2</button>
             <button class="commandButtonsGroup" value="-1" style="padding:10px;font-weight:bold;">-1</button>
@@ -51,12 +54,13 @@
             <button class="commandButtonsGroup" value="2" style="padding:10px;font-weight:bold;">2</button>
             <button class="commandButtonsGroup" value="3" style="padding:10px;font-weight:bold;">3</button>
             <button class="commandButtonsGroup" value="4" style="padding:10px;font-weight:bold;">4</button>
-            <button class="commandButtonsGroup" value="5" style="padding:10px;font-weight:bold;">5</button>
         </div>
         <div>Choose Y:</div>
-        <div><input id="Y-input" type="text" placeholder="a double from -3 to 5" v-model="y"/></div>
+        <div><input id="Y-input" type="text" placeholder="a double from -5 to 3" v-model="y"/></div>
         <div>Choose R:</div>
         <div id="div-r">
+
+            <button class="commandButtonsGroup" value="-4" style="padding:10px;font-weight:bold;;">-4</button>
             <button class="commandButtonsGroup" value="-3" style="padding:10px;font-weight:bold;">-3</button>
             <button class="commandButtonsGroup" value="-2" style="padding:10px;font-weight:bold;">-2</button>
             <button class="commandButtonsGroup" value="-1" style="padding:10px;font-weight:bold;">-1</button>
@@ -64,14 +68,19 @@
             <button class="commandButtonsGroup" value="1" style="padding:10px;font-weight:bold;">1</button>
             <button class="commandButtonsGroup" value="2" style="padding:10px;font-weight:bold;">2</button>
             <button class="commandButtonsGroup" value="3" style="padding:10px;font-weight:bold;">3</button>
-            <button class="commandButtonsGroup" value="4" style="padding:10px;font-weight:bold;">4</button>
-            <button class="commandButtonsGroup" value="5" style="padding:10px;font-weight:bold;background-color:#ce1237;color:white;">5</button>
+            <button class="commandButtonsGroup" value="4" style="padding:10px;font-weight:bold;background-color:#ce1237;color:white">4</button>
         </div>
-        <div><a href="/logout">Logout</a></div>
+        <div><a href="/test" @click="logout">Logout</a></div>
 
         <div class="box-button">
             <button class="effButton" id="checkButton" @click="check" onclick="return false;">Check</button>
-            <button class="effButton" id="resetButton" @click="reset" onclick="return false;">Reset</button>
+        </div>
+
+        <div class="box-error w3-center notification">
+            <div id="outputContainer"></div>
+        </div>
+        <div class="box-result w3-center">
+            <div id="result-table"></div>
         </div>
     </div>
 
@@ -80,4 +89,5 @@
 <script src="script/app.js"></script>
 <script src="script/validator.js"></script>
 <script src="script/graph.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </html>

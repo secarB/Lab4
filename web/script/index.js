@@ -1,5 +1,3 @@
-let loginApi = Vue.resource('rest//login');
-let regApi = Vue.resource('rest/register');
 let caller = null;
 let token = '';
 let signInForm = new Vue({
@@ -9,23 +7,36 @@ let signInForm = new Vue({
         message: ''
     },
     methods: {
-        login: function () {
-
-
+        login: function (key, value) {
             if (this.user.username.trim().length === 0 || this.user.password.trim().length === 0) {
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post('http://localhost:8080/test/rest/auth/login/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post('http://localhost:8080/test/api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
-                        // window.location.replace("app");
+                        localStorage.setItem("token", result.bodyText);
+                        localStorage.setItem("username" , this.user.username);
+                        console.log(result.bodyText);
+                        window.location.replace("app");
                         console.log(result);
                     },
                     error => {
-                        this.message = error.bodyText;
-                        console.log(error);
+                        switch (error.status) {
+                            case 403:
+                                this.message = "User is not exist"
+                                break;
+                            case 401:
+                                this.message = "Incorrect password.";
+                                break;
+                            case 400:
+                                this.message = "Error with server.";
+                                break;
+                            default:
+                                console.log(error);
+                                break;
+                        }
                     }
                 )
 
@@ -40,8 +51,8 @@ let signInForm = new Vue({
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
-                        // window.location.replace("app");
-                        console.log(result);
+                        this.message = "Registration was successful"
+                        console.log(result.bodyText);
                     },
                     error => {
                         console.log(error.status);

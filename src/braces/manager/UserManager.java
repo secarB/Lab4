@@ -68,13 +68,16 @@ public class UserManager {
         User user = null;
         try {
             user = dataBase.getProfile(username);
-            password = SecurePassword.generate(password);
-            String realPass = user.getPassword().trim();
-            if (!realPass.equals(password.trim())){
+            if (user != null) {
+                password = SecurePassword.generate(password);
+                String realPass = user.getPassword().trim();
+                if (!realPass.equals(password.trim())){
                 return Response.status(Response.Status.UNAUTHORIZED).build();
+                }
+            } else
+            {
+                return Response.status(Response.Status.FORBIDDEN).build();
             }
-            String token = Token.generateToken(user.getToken());
-            dataBase.saveToken(user, token);
         } catch (Exception e){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }

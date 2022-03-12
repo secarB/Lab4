@@ -30,9 +30,9 @@ public class FormManager {
 
         List<FormBean> res = null;
         try {
-            //String realUser = (String) request.getAttribute("username");
-        //    if (realUser == null || !realUser.trim().equals(username))
-          //      throw new NotAuthorizedException("Unauthorized");
+            String realUser = (String) request.getAttribute("username");
+            if (realUser == null || !realUser.trim().equals(username))
+             throw new NotAuthorizedException("Unauthorized");
                 dataBase.addPoint(x, y, r, username);
             res = dataBase.getList(username);
         } catch (NotAuthorizedException e){

@@ -16,8 +16,7 @@ svg {
     border-radius: 0.25em;
     border-collapse: collapse;
     margin: auto auto 3%;
-    width: 90%;
-    table-layout: fixed;
+    width: 500px;
 }
 
 #resTable th {

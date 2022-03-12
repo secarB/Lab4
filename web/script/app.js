@@ -1,39 +1,53 @@
 let pointsApi = Vue.resource('/point');
-
+let a = 6;
 Vue.component('rows', {
-    props: ['points'],
+    props: ['messages'],
+    data: function () {
+        return {
+            x: '',
+            y: '',
+            r: '',
+            result: '',
+            id: '',
+            currentTime: '',
+            workTime: '',
+            user: ''
+        }
+    },
     template:
-        `<tbody><tr v-for="point in points" :key="point.id">
-            <td>{{point.x}}</td>
-            <td>{{point.y}}</td>
-            <td>{{point.r}}</td>
-            <td v-if="point.hit" style="color:green; font-weight:bold">True</td>
-            <td v-else style="color:red; font-weight:bold">False</td>
-            <td>{{point.time}}</td>
-        </tr></tbody>`,
+        ` `,
 });
 let table = new Vue({
     el: '#result-table',
     template:
-        `<table id="resTable">
+
+        ` 
+        <table id="resTable" class="resTable">
         <thead>
                 <tr><th>x</th><th>y</th><th>r</th><th>result</th><th>date</th></tr>
         </thead>
-        <rows :points="points"></rows>
         </table>`,
+
     data: {
-        points: [],
+        messages: [],
     },
     created: function () {
-        pointsApi.get().then(result => result.json().then(data => {
-            table.points = data;
-            console.log(table.points);
-            loadDots();
-        }));
+        this.$http.get('http://localhost:8080/test/api/points/'+ localStorage.getItem("username"),{headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer,${localStorage.getItem("token")}`
+            }}).then(data => {
+            data.json().then( res => {
+                table.messages = res;
+                console.log(table.messages);
+                loadDots()
+            }
+            )
+        })
+        ;
     },
     updated: function () {
-        if (this.points.length>0) {
-            addDot(table.points.length - 1);
+        if (this.messages.length>0) {
+            addDot(table.messages.length - 1);
         }
     },
 });
@@ -43,7 +57,7 @@ let form = new Vue({
     data: {
         x: null,
         y: null,
-        r: 5
+        r: 4
     },
     methods: {
         check: function () {
@@ -57,18 +71,24 @@ let form = new Vue({
                 str += `x=${this.x}&`;
                 str += `y=${this.y}&`;
                 str += `r=${this.r}&`;
-                this.$http.post('http://localhost:8080/test/api/points/'+ '3',[str],{headers: {
+                this.$http.post('http://localhost:8080/test/api/points/'+ localStorage.getItem("username"),[str],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         Authorization: `Bearer,${localStorage.getItem("token")}`
                     }}).then(
                     result => result.json().then(
                         data => {
                             textWindow.message = "";
-                            table.points.push(data);
-                        }, error => {
-                            textWindow.message = "Something wrong with JSON" + error.body.error;
-                            console.log("Something wrong with JSON" + error.body.error)
-                        }
+                            this.$http.get('http://localhost:8080/test/api/points/'+ localStorage.getItem("username"),{headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded",
+                                    Authorization: `Bearer,${localStorage.getItem("token")}`
+                                }}).then(result => {
+                                result.json().then( res => {
+                                    table.messages = res;
+                                    console.log(res);
+                                    loadDots();
+                                })
+                            });
+                        },
                     ),
                     error => {
                         console.log(error);
@@ -83,23 +103,41 @@ let form = new Vue({
                                 textWindow.message = "Error";
                                 break;
                         }
-
-
                     });
+
             }
         },
-        reset: function () {
-            pointsApi.remove({}).then(result => result.text().then(data => {
-                    textWindow.message = data;
-                    table.points = [];
-                    loadDots();
-                }),
-                error => {
-                    textWindow.message = "Error: " + error.body.error;
-                });
+        logout: function (){
+            localStorage.removeItem("token");
+            localStorage.removeItem("username");
         }
     }
+
 })
+
+function loadDots() {
+    let oldDots = document.querySelectorAll("circle");
+    oldDots.forEach(dot => dot.parentNode.removeChild(dot));
+    let length = table.messages.length;
+    console.log("length: "+length);
+    for (let i = 0; i<length; i++) {
+        addDot(i);
+    }
+}
+
+function addDot(pos) {
+    let dotCoords = {
+        x: table.messages[pos].x*unit + 150,
+        y: 150 - table.messages[pos].y*unit
+    };
+    let dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    dot.setAttribute("r", "4");
+    dot.setAttribute("cx", `${dotCoords.x}`);
+    dot.setAttribute("cy", `${dotCoords.y}`);
+    dot.setAttribute("fill", table.messages[pos].result? "green" : "red");
+    svg.appendChild(dot);
+}
+
 let textWindow = new Vue({
     el: "#outputContainer",
     template: '<span>{{message}}</span>',

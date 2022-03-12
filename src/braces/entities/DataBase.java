@@ -50,9 +50,8 @@ public class DataBase implements Serializable {
     }
 
     public void saveToken(User user, String token){
-        entityManager.getTransaction().begin();
         user.setToken(token);
-        entityManager.getTransaction().commit();
+        entityManager.persist(user);
     }
 
     public User getProfile(String username){
