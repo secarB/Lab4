@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
         str += `y=${point.y}&`;
         str += `r=${point.r}&`;
         console.log(str);
-        Vue.http.post(notOnHelios+'api/points/'+ localStorage.getItem("username"),[str],{headers: {
+        Vue.http.post(onHelios+'api/points/'+ localStorage.getItem("username"),[str],{headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 Authorization: `Bearer,${localStorage.getItem("token")}`
             }}).then(
             result => result.json().then(
                 data => {
-                    Vue.http.get(notOnHelios+'api/points/'+ localStorage.getItem("username"),{headers: {
+                    Vue.http.get(onHelios+'api/points/'+ localStorage.getItem("username"),{headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
                             Authorization: `Bearer,${localStorage.getItem("token")}`
                         }}).then(result => {

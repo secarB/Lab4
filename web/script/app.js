@@ -33,7 +33,7 @@ let table = new Vue({
         messages: [],
     },
     created: function () {
-        this.$http.get(notOnHelios+'api/points/'+ localStorage.getItem("username"),{headers: {
+        this.$http.get(onHelios+'api/points/'+ localStorage.getItem("username"),{headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 Authorization: `Bearer,${localStorage.getItem("token")}`
             }}).then(data => {
@@ -43,6 +43,20 @@ let table = new Vue({
                 loadDots()
             }
             )
+        }, error => {
+            switch (error.status) {
+                case 401:
+                    window.location.replace(onHelios);
+                    break;
+                case 400:
+                    window.location.replace(onHelios);
+                    this.message = "Error with server.";
+                    break;
+                default:
+                    window.location.replace(onHelios);
+                    console.log(error);
+                    break;
+            }
         })
         ;
     },
@@ -72,14 +86,14 @@ let form = new Vue({
                 str += `x=${this.x}&`;
                 str += `y=${this.y}&`;
                 str += `r=${this.r}&`;
-                this.$http.post(notOnHelios+'lab4/api/points/'+ localStorage.getItem("username"),[str],{headers: {
+                this.$http.post(onHelios+'lab4/api/points/'+ localStorage.getItem("username"),[str],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         Authorization: `Bearer,${localStorage.getItem("token")}`
                     }}).then(
                     result => result.json().then(
                         data => {
                             textWindow.message = "";
-                            this.$http.get(notOnHelios+'lab4/api/points/'+ localStorage.getItem("username"),{headers: {
+                            this.$http.get(onHelios+'lab4/api/points/'+ localStorage.getItem("username"),{headers: {
                                     "Content-Type": "application/x-www-form-urlencoded",
                                     Authorization: `Bearer,${localStorage.getItem("token")}`
                                 }}).then(result => {

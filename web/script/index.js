@@ -14,7 +14,7 @@ let signInForm = new Vue({
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post(notOnHelios+'api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post(onHelios+'api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
@@ -49,7 +49,7 @@ let signInForm = new Vue({
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post(notOnHelios+'api/user/register/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post(onHelios+'api/user/register/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
