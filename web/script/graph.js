@@ -1,5 +1,4 @@
 "use strict";
-
 const svg = document.getElementById("graph");
 const rect = document.getElementById("rect");
 const triangle = document.getElementById("triangle");
@@ -25,13 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
         str += `y=${point.y}&`;
         str += `r=${point.r}&`;
         console.log(str);
-        Vue.http.post('http://localhost:1070/lab4/api/points/'+ localStorage.getItem("username"),[str],{headers: {
+        Vue.http.post(notOnHelios+'api/points/'+ localStorage.getItem("username"),[str],{headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 Authorization: `Bearer,${localStorage.getItem("token")}`
             }}).then(
             result => result.json().then(
                 data => {
-                    Vue.http.get('http://localhost:1070/lab4/api/points/'+ localStorage.getItem("username"),{headers: {
+                    Vue.http.get(notOnHelios+'api/points/'+ localStorage.getItem("username"),{headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
                             Authorization: `Bearer,${localStorage.getItem("token")}`
                         }}).then(result => {

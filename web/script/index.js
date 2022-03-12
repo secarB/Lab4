@@ -1,4 +1,6 @@
-let caller = null;
+
+const onHelios= 'http://localhost:1070/lab4/';
+const notOnHelios = 'http://localhost:8080/test/'
 let token = '';
 let signInForm = new Vue({
     el: '#mainTable',
@@ -12,7 +14,7 @@ let signInForm = new Vue({
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post('http://localhost:1070/lab4/api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post(notOnHelios+'api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
@@ -47,7 +49,7 @@ let signInForm = new Vue({
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post('http://localhost:1070/lab4/api/user/register/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post(notOnHelios+'api/user/register/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
