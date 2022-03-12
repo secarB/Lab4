@@ -47,7 +47,7 @@ function validateY(y) {
     } else if (!isNumeric(y)) {
         textWindow.message="Y is not numeric";
         return false;
-    } else if (!((y > -3) && (y < 5))) {
+    } else if (!((y > -5) && (y < 3))) {
         textWindow.message="Y is out of range";
         return false;
     } else return true;
