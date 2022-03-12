@@ -12,7 +12,7 @@ let signInForm = new Vue({
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post('http://localhost:8080/test/api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post('http://localhost:1070/lab4/api/user/login/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {
@@ -47,7 +47,7 @@ let signInForm = new Vue({
                 this.message = "Please fill all the fields.";
             } else {
                 this.message = '';
-                this.$http.post('http://localhost:8080/test/api/user/register/'+ this.user.username,['password=' + this.user.password],{headers: {
+                this.$http.post('http://localhost:1070/lab4/api/user/register/'+ this.user.username,['password=' + this.user.password],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }}).then(
                     result => {

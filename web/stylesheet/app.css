@@ -28,7 +28,7 @@ svg {
     text-decoration: none;
 }
 
-@media screen and (min-device-width: 1047px) {
+@media screen and (min-device-width: 1035px) {
     #mainTable{
         /*width: max-content;*/
         display: grid;
@@ -54,7 +54,7 @@ svg {
     }
 }
 
-@media screen and (max-device-width: 1046px) and (min-device-width: 849px) {
+@media screen and (max-device-width: 1035px) and (min-device-width: 651px) {
     #content{
         width: 90vw;
     }
@@ -76,7 +76,7 @@ svg {
 }
 
 
-@media screen and (max-device-width: 848px) {
+@media screen and (max-device-width: 651px) {
     #content{
         width: 100vw;
     }

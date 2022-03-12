@@ -32,7 +32,7 @@ let table = new Vue({
         messages: [],
     },
     created: function () {
-        this.$http.get('http://localhost:8080/test/api/points/'+ localStorage.getItem("username"),{headers: {
+        this.$http.get('http://localhost:1070/lab4/api/points/'+ localStorage.getItem("username"),{headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 Authorization: `Bearer,${localStorage.getItem("token")}`
             }}).then(data => {
@@ -71,14 +71,14 @@ let form = new Vue({
                 str += `x=${this.x}&`;
                 str += `y=${this.y}&`;
                 str += `r=${this.r}&`;
-                this.$http.post('http://localhost:8080/test/api/points/'+ localStorage.getItem("username"),[str],{headers: {
+                this.$http.post('http://localhost:1070/lab4/api/points/'+ localStorage.getItem("username"),[str],{headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         Authorization: `Bearer,${localStorage.getItem("token")}`
                     }}).then(
                     result => result.json().then(
                         data => {
                             textWindow.message = "";
-                            this.$http.get('http://localhost:8080/test/api/points/'+ localStorage.getItem("username"),{headers: {
+                            this.$http.get('http://localhost:1070/lab4/api/points/'+ localStorage.getItem("username"),{headers: {
                                     "Content-Type": "application/x-www-form-urlencoded",
                                     Authorization: `Bearer,${localStorage.getItem("token")}`
                                 }}).then(result => {

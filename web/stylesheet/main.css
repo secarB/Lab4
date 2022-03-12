@@ -65,7 +65,7 @@ input, svg {
 /*    border-bottom: 1px solid #000000;*/
 /*}*/
 
-@media screen and (min-device-width: 1047px) {
+@media screen and (min-device-width: 1035px) {
     #content {
         margin-top: 15vh;
     }
@@ -74,7 +74,7 @@ input, svg {
     }
 }
 
-@media screen and (max-device-width: 1046px) and (min-device-width: 849px) {
+@media screen and (max-device-width: 1035px) and (min-device-width: 651px) {
     * {
         font-size: 4vw;
     }
@@ -92,7 +92,7 @@ input, svg {
     }
 }
 
-@media screen and (max-device-width: 848px) {
+@media screen and (max-device-width: 651px) {
     * {
         font-size: 5vw;
     }
